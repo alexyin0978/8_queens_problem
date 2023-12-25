@@ -1,12 +1,15 @@
 type Board = ("Q" | "." | boolean | undefined)[][];
 
-const CHESSBOARD_SIZE = 8;
+// 8 * 8
+const CHESSBOARD_SIZE = 4;
 
 // create the board first
 // each position will be undefined first
-const board: Board = new Array(CHESSBOARD_SIZE)
-  .fill(undefined)
-  .map(() => new Array(CHESSBOARD_SIZE).fill(undefined));
+const generateNewBoard = (size: number): Board => {
+  return new Array(CHESSBOARD_SIZE)
+    .fill(undefined)
+    .map(() => new Array(CHESSBOARD_SIZE).fill(undefined));
+};
 
 function printSolution(board: Board) {
   for (let rowIdx = 0; rowIdx < CHESSBOARD_SIZE; rowIdx++) {
@@ -25,12 +28,12 @@ function printSolution(board: Board) {
 function isSafe(board: Board, currentRowIdx: number, currentColIdx: number) {
   let colIdx: number, rowIdx: number;
 
-  // check col on the left of current position
+  // Check the ← direction
   for (colIdx = 0; colIdx < currentColIdx; colIdx++) {
     if (board[currentRowIdx][colIdx]) return false;
   }
 
-  // check col on upper left diagonal of current position
+  // Check the ↖ direction
   for (
     rowIdx = currentRowIdx, colIdx = currentColIdx;
     rowIdx >= 0 && colIdx >= 0;
@@ -39,13 +42,12 @@ function isSafe(board: Board, currentRowIdx: number, currentColIdx: number) {
     if (board[rowIdx][colIdx]) return false;
   }
 
-  // check col on lower left diagonal of current position
+  // Check the ↙ direction
   for (
     rowIdx = currentRowIdx, colIdx = currentColIdx;
     rowIdx < CHESSBOARD_SIZE && colIdx >= 0;
     rowIdx++, colIdx--
   ) {
-    // console.log('position: ', rowIdx, colIdx);
     if (board[rowIdx][colIdx]) return false;
   }
 
@@ -56,7 +58,11 @@ function isSafe(board: Board, currentRowIdx: number, currentColIdx: number) {
 // recursively check and place Q in the board
 function checkAndPlaceQ(board: Board, currentColIdx: number) {
   // base case: if all columns are checked, return true
-  if (currentColIdx >= CHESSBOARD_SIZE) return true;
+  if (currentColIdx === CHESSBOARD_SIZE) {
+    printSolution(board);
+    console.log("---");
+    return true;
+  }
 
   // stick with currentCol
   // and try placing Q in all rows of the column one by one
@@ -66,7 +72,7 @@ function checkAndPlaceQ(board: Board, currentColIdx: number) {
       board[rowIdx][currentColIdx] = true;
 
       // recursively run this fn to place other Qs
-      if (checkAndPlaceQ(board, currentColIdx + 1)) return true;
+      checkAndPlaceQ(board, currentColIdx + 1);
 
       // if placing Q in board[rowIdx][currentColIdx] doesn't lead to
       // final solution, backtrack
@@ -79,12 +85,14 @@ function checkAndPlaceQ(board: Board, currentColIdx: number) {
 }
 
 function executeThisAlgo() {
+  const board = generateNewBoard(CHESSBOARD_SIZE);
+
   if (!checkAndPlaceQ(board, 0)) {
     console.log("Solution does not exist");
     return false;
   }
 
-  printSolution(board);
+  // printSolution(board);
   return true;
 }
 
