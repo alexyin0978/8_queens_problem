@@ -1,5 +1,5 @@
 // 8 * 8
-var CHESSBOARD_SIZE = 4;
+var CHESSBOARD_SIZE = 8;
 // create the board first
 // each position will be undefined first
 var generateNewBoard = function (size) {
@@ -73,3 +73,14 @@ function executeThisAlgo() {
 }
 // run `npm run start` to run the file
 executeThisAlgo();
+/*
+Ref:
+1. 八皇后回溯算法原理剖析及其JS实现
+https://blog.csdn.net/weixin_45664402/article/details/115278420
+
+2. 8.12 The 8 Queens Problem with Solutions Ruby, Javascript and Python
+https://medium.com/cracking-the-coding-interview-in-ruby-python-and/8-12-the-8-queens-problem-with-solutions-ruby-javascript-and-python-409cea33b5b3
+
+3. Finding Multiple Solutions to "8 Queens"
+https://stackoverflow.com/questions/36487345/finding-multiple-solutions-to-8-queens
+*/

@@ -1,14 +1,14 @@
 type Board = ("Q" | "." | boolean | undefined)[][];
 
 // 8 * 8
-const CHESSBOARD_SIZE = 4;
+const CHESSBOARD_SIZE = 8;
 
 // create the board first
 // each position will be undefined first
 const generateNewBoard = (size: number): Board => {
-  return new Array(CHESSBOARD_SIZE)
+  return new Array(size)
     .fill(undefined)
-    .map(() => new Array(CHESSBOARD_SIZE).fill(undefined));
+    .map(() => new Array(size).fill(undefined));
 };
 
 function printSolution(board: Board) {
@@ -92,7 +92,6 @@ function executeThisAlgo() {
     return false;
   }
 
-  // printSolution(board);
   return true;
 }
 
