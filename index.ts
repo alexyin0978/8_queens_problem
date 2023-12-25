@@ -89,4 +89,5 @@ function executeThisAlgo() {
   return true;
 }
 
+// run `npm run start` to run the file
 executeThisAlgo();
