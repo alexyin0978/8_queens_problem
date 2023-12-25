@@ -1,4 +1,4 @@
-type Board = (string | boolean | undefined)[][];
+type Board = ("Q" | "." | boolean | undefined)[][];
 
 const CHESSBOARD_SIZE = 8;
 
@@ -7,7 +7,6 @@ const CHESSBOARD_SIZE = 8;
 const board: Board = new Array(CHESSBOARD_SIZE)
   .fill(undefined)
   .map(() => new Array(CHESSBOARD_SIZE).fill(undefined));
-// console.log('board: ', board);
 
 function printSolution(board: Board) {
   for (let rowIdx = 0; rowIdx < CHESSBOARD_SIZE; rowIdx++) {
@@ -24,7 +23,7 @@ function printSolution(board: Board) {
 
 // helper fn to check if Q can be placed on board[rowIdx][colIdx]
 function isSafe(board: Board, currentRowIdx: number, currentColIdx: number) {
-  let colIdx, rowIdx;
+  let colIdx: number, rowIdx: number;
 
   // check col on the left of current position
   for (colIdx = 0; colIdx < currentColIdx; colIdx++) {
